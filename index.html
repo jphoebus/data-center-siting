@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Approves a Data Center? How Five States Decide Where Data Centers Can Be Built | Joshua Phoebus</title>
+<meta name="description" content="How Pennsylvania, Virginia, Ohio, Maryland and Georgia decide where data centers can be built: local zoning, state permits, regional review and utility rules. Current as of October 21, 2026.">
+<meta property="og:title" content="Who Approves a Data Center? How Five States Decide Where Data Centers Can Be Built">
+<meta property="og:description" content="How five states decide where data centers can be built: local zoning, state permits, regional review and utility rules.">
+<meta property="og:image" content="https://jphoebus.github.io/data-center-siting/siting-preview.png">
+<meta property="og:url" content="https://jphoebus.github.io/data-center-siting/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --limestone: #EDF0F1;
+    --paper: #FFFFFF;
+    --ink: #1B2631;
+    --slate: #52606D;
+    --rule: #CBD2D9;
+    --accent: #1F5C4A;
+    --accent-soft: #DCEBE5;
+    --side: #F5F7F8;
+    --font: "Public Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--limestone);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .measure { max-width: 68ch; }
+
+  /* Header */
+  header { padding: 64px 0 40px; }
+  h1 {
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    max-width: 18ch;
+  }
+  .lede { font-size: 1.15rem; color: var(--slate); margin: 0; }
+  .finding { font-size: 1.15rem; font-weight: 500; border-left: 4px solid var(--accent); padding-left: 20px; margin: 28px 0 0; }
+  .finding + .finding { margin-top: 14px; }
+
+  /* Comparison */
+  section { padding: 48px 0; }
+  h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .band { background: var(--paper); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .band p { margin: 0 0 12px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 20px; align-items: center; }
+  .filters p { margin: 0 8px 0 0; color: var(--slate); font-size: 0.95rem; }
+  .chip {
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border: 1.5px solid var(--accent);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="false"] { background: transparent; color: var(--accent); }
+  .table-scroll {
+    overflow-x: auto;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 980px; font-size: 0.92rem; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--rule); }
+  thead th {
+    font-size: 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--ink);
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+  }
+  tbody th {
+    font-weight: 600;
+    color: var(--slate);
+    width: 170px;
+    position: sticky;
+    left: 0;
+    background: var(--paper);
+  }
+  [hidden] { display: none !important; }
+  td.empty { color: var(--slate); font-style: italic; }
+
+  /* Step by step */
+  .state-steps { background: var(--paper); border: 1px solid var(--rule); margin-top: 12px; }
+  .state-steps summary {
+    cursor: pointer;
+    padding: 14px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    align-items: baseline;
+    list-style-position: inside;
+  }
+  .state-steps summary .st { font-size: 1.2rem; font-weight: 700; }
+  .state-steps summary .count { color: var(--slate); font-size: 0.95rem; }
+  .state-steps[open] summary { border-bottom: 2px solid var(--ink); }
+  .state-steps .table-scroll { border: 0; }
+  table.steps { min-width: 760px; }
+  table.steps thead th { position: static; font-size: 0.92rem; border-bottom: 1px solid var(--rule); color: var(--slate); }
+  table.steps tbody th { width: 64px; color: var(--ink); position: static; }
+  table.steps td:nth-child(3) { width: 200px; }
+  table.steps td:nth-child(4) { width: 220px; }
+  table.steps span { display: block; }
+  table.steps .note { color: var(--slate); margin-top: 4px; }
+  table.steps .src { color: var(--slate); font-size: 0.85rem; margin-top: 4px; }
+  table.steps .ttype { color: var(--slate); font-size: 0.85rem; margin-top: 2px; }
+  table.steps .path {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 2px;
+  }
+  table.steps tr.side th, table.steps tr.side td { background: var(--side); color: var(--slate); }
+  table.steps tr.side th { font-weight: 500; }
+  .key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 16px 0 4px; font-size: 0.95rem; color: var(--slate); }
+  .key span::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    vertical-align: -2px;
+    border: 1px solid var(--rule);
+  }
+  .key .k-main::before { background: var(--paper); }
+  .key .k-side::before { background: var(--side); }
+
+  /* Sources and downloads */
+  .sources h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 6px; }
+  .sources ul { margin: 0; padding-left: 1.1em; }
+  .sources li { margin-bottom: 6px; }
+  .sources .covers { color: var(--slate); font-size: 0.9rem; }
+  .sources .covers::before { content: "· "; }
+  ul.downloads { padding-left: 1.1em; margin: 12px 0 0; }
+  ul.downloads li { margin-bottom: 10px; }
+  footer { border-top: 1px solid var(--rule); padding: 40px 0 64px; color: var(--slate); font-size: 0.95rem; }
+  footer p { margin: 0 0 12px; }
+
+  @media (max-width: 800px) {
+    header { padding-top: 40px; }
+  }
+  @media print {
+    .filters { display: none; }
+    body { background: #fff; }
+    .table-scroll { overflow: visible; border: 0; }
+    thead th, tbody th { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Who approves a data center?</h1>
+    <p class="lede measure">How Pennsylvania, Virginia, Ohio, Maryland and Georgia decide where data centers can be built: local zoning, state permits, regional review and utility rules. Current as of October 21, 2026.</p>
+    <p class="finding measure"><strong>Each state puts its decision points in a different place.</strong> Pennsylvania ties state environmental review to local approval: under Executive Order 2026-05, DEP issues permits only after local approvals are documented. Ohio lets a state board&#x27;s certificate for an on-site power plant replace local review, and township voters can petition to overturn a rezoning. Virginia requires a site and sound assessment for facilities of 100 MW or more before local approval. Georgia sends large projects through a regional review that takes comment but does not decide. In Maryland, several counties have paused data center development.</p>
+    <p class="finding measure"><strong>Missed deadlines mean different things.</strong> In Pennsylvania, a municipality that misses its decision deadline deems the project approved. In Virginia, only the planning commission&#x27;s recommendation is deemed approval; the statute sets no consequence when the governing body misses its 12-month deadline.</p>
+    <p class="finding measure"><strong>Large-load electricity tariffs are at different stages:</strong> in effect in Georgia (January 2025, over 100 MW) and Ohio (July 2025, 25 MW and up); Virginia&#x27;s takes effect Jan. 1, 2027; Maryland&#x27;s are under PSC review; Pennsylvania&#x27;s is a tentative order with a final vote targeted for Jan. 28, 2027.</p>
+  </div>
+</header>
+
+<main>
+  <section id="how-to-read" class="band">
+    <div class="wrap"><div class="measure">
+      <h2>How to read this</h2>
+      <p>Each state&#x27;s process is simplified here. The steps a project actually follows depend on the locality, the site and the permits it needs. This page is for policy analysis and is not legal advice.</p>
+      <p>&quot;None found&quot; means this research did not find one, not that none exists.</p>
+      <p>Times are given only where a statute, rule or order sets them. Elsewhere, a step shows a dash or says the time varies, is set locally, or has no set deadline. Where a detail rests on a secondary source rather than a statute, rule, order or official record, the page says &quot;as reported.&quot;</p>
+    </div></div>
+  </section>
+
+  <section id="comparison">
+    <div class="wrap">
+      <h2>Side-by-side comparison</h2>
+      <p class="measure">Choose which states to compare. On a phone, scroll the table sideways.</p>
+      <div class="filters" id="filters" role="group" aria-label="States to compare"><p>Showing:</p><button class="chip" type="button" aria-pressed="true" data-state="pennsylvania">Pennsylvania</button><button class="chip" type="button" aria-pressed="true" data-state="virginia">Virginia</button><button class="chip" type="button" aria-pressed="true" data-state="ohio">Ohio</button><button class="chip" type="button" aria-pressed="true" data-state="maryland">Maryland</button><button class="chip" type="button" aria-pressed="true" data-state="georgia">Georgia</button></div>
+      <div class="table-scroll" tabindex="0" aria-label="Comparison table">
+        <table id="table">
+<thead><tr><th scope="col"></th>
+<th scope="col" data-state="pennsylvania">Pennsylvania</th>
+<th scope="col" data-state="virginia">Virginia</th>
+<th scope="col" data-state="ohio">Ohio</th>
+<th scope="col" data-state="maryland">Maryland</th>
+<th scope="col" data-state="georgia">Georgia</th>
+</tr></thead><tbody>
+<tr><th scope="row">Who holds zoning authority</th>
+<td data-state="pennsylvania">Municipalities (about 2,500 boroughs, townships and cities); county ordinances apply where a township has none</td>
+<td data-state="virginia">Counties and cities</td>
+<td data-state="ohio">Cities (home rule), townships and counties; township zoning is optional, and many rural townships have none</td>
+<td data-state="maryland">Counties and Baltimore City</td>
+<td data-state="georgia">Counties and cities</td>
+</tr>
+<tr><th scope="row">Statewide deadlines for local decisions</th>
+<td data-state="pennsylvania">Conditional use: hearing within 60 days, decision within 45 days after last hearing; county review 30 days; land development plan within 90 days</td>
+<td data-state="virginia">Planning commission: 100 days; county governing body: 12 months; site plans: 40 days</td>
+<td data-state="ohio">Township rezoning: hearing 20–40 days after filing; recommendation within 30 days; trustee hearing within 30 days; decision within 20 days</td>
+<td data-state="maryland">Set by each county</td>
+<td data-state="georgia">Hearing notice 15–45 days ahead; regional review up to 30 days; no decision deadline found</td>
+</tr>
+<tr><th scope="row">If the local deadline is missed</th>
+<td data-state="pennsylvania">Project is deemed approved</td>
+<td data-state="virginia">Planning commission is deemed to recommend approval; no deemed approval for the governing body</td>
+<td class="empty" data-state="ohio">None found</td>
+<td data-state="maryland">Set locally</td>
+<td class="empty" data-state="georgia">None found</td>
+</tr>
+<tr><th scope="row">Voter referendum on a rezoning</th>
+<td class="empty" data-state="pennsylvania">None identified</td>
+<td class="empty" data-state="virginia">None identified</td>
+<td data-state="ohio">Yes: township voters can petition within 30 days of adoption; megaproject rezonings exempt since Sept. 2026, and large data centers are not excluded from that definition</td>
+<td data-state="maryland">No: courts ruled Frederick County&#x27;s data center ordinance not subject to referendum (June 2026, as reported)</td>
+<td class="empty" data-state="georgia">None identified</td>
+</tr>
+<tr><th scope="row">Regional or county review layer</th>
+<td data-state="pennsylvania">County planning agency reviews land development plans (advisory; 30 days)</td>
+<td class="empty" data-state="virginia">None</td>
+<td data-state="ohio">County or regional planning commission recommends (advisory)</td>
+<td data-state="maryland">None statewide; Montgomery and Prince George&#x27;s use a bi-county planning commission</td>
+<td data-state="georgia">Regional commission reviews large projects within 30 days and takes comment; locality cannot give final approval until it ends</td>
+</tr>
+<tr><th scope="row">State-required site or impact disclosure</th>
+<td data-state="pennsylvania">None statewide; GRID Requirements notice under the executive order</td>
+<td data-state="virginia">Site assessment for 100 MW or more, including sound at homes and schools within 500 feet</td>
+<td class="empty" data-state="ohio">None found</td>
+<td data-state="maryland">Registry with the PSC, energy and water use, from January 2027</td>
+<td data-state="georgia">Water and electricity estimates in regional review</td>
+</tr>
+<tr><th scope="row">Does state environmental review wait on local approval?</th>
+<td data-state="pennsylvania">Yes, under Executive Order 2026-05</td>
+<td data-state="virginia">No</td>
+<td class="empty" data-state="ohio">No link found</td>
+<td class="empty" data-state="maryland">No link found</td>
+<td class="empty" data-state="georgia">No link found</td>
+</tr>
+<tr><th scope="row">Can the state override local review?</th>
+<td data-state="pennsylvania">No</td>
+<td data-state="virginia">No</td>
+<td data-state="ohio">Yes: a Power Siting Board certificate for on-site power plants replaces local review (Hilliard, 72.9 MW, 2025)</td>
+<td data-state="maryland">No; qualifying backup generators skip PSC approval but not local zoning</td>
+<td data-state="georgia">No</td>
+</tr>
+<tr><th scope="row">Backup generators</th>
+<td data-state="pennsylvania">Executive order directs DEP to examine emission rules</td>
+<td data-state="virginia">Tier 4 generators required for new data centers (2026, as reported)</td>
+<td data-state="ohio">Standard Ohio EPA air permits</td>
+<td data-state="maryland">MDE permit to construct; no PSC approval if backup-only and no grid export</td>
+<td data-state="georgia">EPD air permits by size; synthetic minor common for large fleets</td>
+</tr>
+<tr><th scope="row">Governor&#x27;s executive action</th>
+<td data-state="pennsylvania">Executive Order 2026-05 (August 2026)</td>
+<td data-state="virginia">Executive Order 22 (Sept. 18, 2026)</td>
+<td class="empty" data-state="ohio">None found</td>
+<td class="empty" data-state="maryland">None found</td>
+<td class="empty" data-state="georgia">None found</td>
+</tr>
+<tr><th scope="row">Large-load tariff</th>
+<td data-state="pennsylvania">PUC tentative order; final vote targeted Jan. 28, 2027</td>
+<td data-state="virginia">Dominion GS-5, 25 MW and up; effective Jan. 1, 2027</td>
+<td data-state="ohio">AEP Ohio, 25 MW and up; in effect since July 23, 2025</td>
+<td data-state="maryland">25 MW and 60% load factor (May 2026 law); tariffs filed Sept. 1, PSC review under way</td>
+<td data-state="georgia">Georgia Power, over 100 MW; in effect since Jan. 2025 (contracts up to 15 years)</td>
+</tr>
+<tr><th scope="row">Legislature in 2026</th>
+<td data-state="pennsylvania">No siting law found in this research</td>
+<td data-state="virginia">Site assessment law (SB 94/HB 153); Tier 4 generators for new data centers</td>
+<td data-state="ohio">Bills pending (study commission, siting limits, NDA ban); 2025 law eased on-site power</td>
+<td data-state="maryland">Utility RELIEF Act (HB 1532), emergency law</td>
+<td data-state="georgia">No data center bill passed</td>
+</tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps" class="band">
+    <div class="wrap">
+      <h2>Step by step</h2>
+      <p class="measure">Each state&#x27;s approval steps, in order. The lane is who acts at that step. Steps with a letter (such as 9a and 9b) are alternatives that follow a decision point. Rows in lighter type are off the main path: decision points, branches, parallel tracks that run alongside the local process, and pending items.</p>
+      <div class="key" aria-hidden="true"><span class="k-main">Main path</span><span class="k-side">Decision point, branch, parallel track or pending</span></div>
+<details class="state-steps" id="steps-pennsylvania">
+<summary><span class="st">Pennsylvania</span><span class="count">16 steps, 10 on the main path</span></summary>
+<div class="table-scroll"><table class="steps">
+<thead><tr><th scope="col">Step</th><th scope="col">What happens</th><th scope="col">Lane</th><th scope="col">Time</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><span class="desc">Confirm local zoning allows a data center</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">2</th><td><span class="desc">File conditional use or special exception application</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">3</th><td><span class="desc">Begin first hearing</span><span class="note">Conditional use borrows the zoning hearing board hearing rule.</span><span class="src">Source: MPC §908(1.2), applied to conditional use via §913.2</span></td><td>Municipality</td><td>Within 60 days of application<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">4</th><td><span class="desc">Issue written decision (deemed approved if missed)</span><span class="note">Deemed approval is the issue in the Muncy Township case.</span><span class="src">Source: MPC §913.2(b)(1)</span></td><td>Municipality</td><td>Within 45 days after last hearing<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">5</th><td><span class="desc">File land development plan</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">6</th><td><span class="desc">Review plan and report to municipality</span><span class="note">The municipality may not approve until it receives the county report or 30 days pass. Where a township has no subdivision ordinance of its own, the county ordinance applies.</span><span class="src">Source: MPC §502(b), per MPC timing provisions summary</span></td><td>County planning agency</td><td>30 days<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">7</th><td><span class="desc">Decide land development plan</span><span class="note">Written decision to applicant within 15 days after the decision.</span><span class="src">Source: MPC §508</span></td><td>Municipality</td><td>Within 90 days after next regular meeting after filing<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">8</th><td><span class="path">Decision point</span><span class="desc">Decision: sign a Consent Order and Agreement? (projects over 25 MW)</span><span class="src">Source: Executive Order 2026-05, Sec. 1(a)</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">9a</th><td><span class="path">Yes branch</span><span class="desc">Yes: file notice of intent to meet GRID Requirements; meet with DEP on local approval timing; sign the order</span><span class="src">Source: Executive Order 2026-05, Sec. 1(b)(1)</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">10a</th><td><span class="path">Yes branch</span><span class="desc">Yes: review permits on a rolling basis; issue only after local approvals are documented</span><span class="src">Source: Executive Order 2026-05, Sec. 1(b)(2)</span></td><td>DEP</td><td>Permit clocks start after local approvals are documented<span class="ttype">Set by order</span></td></tr>
+<tr class="side"><th scope="row">9b</th><td><span class="path">No branch</span><span class="desc">No: don&#x27;t begin review until local approvals are documented</span><span class="src">Source: Executive Order 2026-05, Sec. 1(c)</span></td><td>DEP</td><td>No rolling review; excluded from PAyback and Permit Decision Guarantee<span class="ttype">Set by order</span></td></tr>
+<tr><th scope="row">11</th><td><span class="desc">Submit permit applications (stormwater, waterway encroachment, air plan approval for generators, as applicable)</span><span class="note">Labeled &quot;as applicable.&quot;</span><span class="src">Source: General DEP permitting; the order names no specific permits</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">12</th><td><span class="desc">Public notice and comment; hearing if scheduled</span></td><td>DEP</td><td>Varies by permit<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">13</th><td><span class="desc">Issue permits</span></td><td>DEP</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">14</th><td><span class="path">Parallel track</span><span class="desc">Request service; utility studies load and registers it with PJM</span><span class="note">Runs alongside steps 1–13.</span><span class="src">Source: Executive Order 2026-05, Sec. 3(c)</span></td><td>Electric utility &amp; PUC</td><td>No set deadline<span class="ttype">Open-ended</span></td></tr>
+<tr class="side"><th scope="row">15</th><td><span class="path">Parallel track</span><span class="desc">Large-load tariff rules: proposed, final PUC vote targeted Jan. 28, 2027</span><span class="note">Runs alongside steps 1–13.</span><span class="src">Source: PUC tentative order, Docket M-2026-3064961</span></td><td>Electric utility &amp; PUC</td><td>Pending<span class="ttype">Set by order</span></td></tr>
+</tbody></table></div>
+</details>
+<details class="state-steps" id="steps-virginia">
+<summary><span class="st">Virginia</span><span class="count">14 steps, 10 on the main path</span></summary>
+<div class="table-scroll"><table class="steps">
+<thead><tr><th scope="col">Step</th><th scope="col">What happens</th><th scope="col">Lane</th><th scope="col">Time</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><span class="desc">Confirm local zoning: by right, special use permit, or rezoning needed</span><span class="note">Varies by locality. Loudoun ended by-right data centers in March 2025; Prince William largely did on Sept. 22, 2026.</span><span class="src">Source: McGuireWoods alert, Sept. 24, 2026</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">2</th><td><span class="desc">File rezoning, proffer amendment or special use permit application</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">3</th><td><span class="desc">Facilities of 100 MW or more: submit site assessment, including sound profile for homes and schools within 500 feet; utility discloses substations and transmission needed</span><span class="note">Required before approval of a rezoning, proffer amendment or special use permit.</span><span class="src">Source: Va. Code §15.2-2209.5 (SB 94/HB 153, 2026 Acts ch. 568)</span></td><td>Developer</td><td>Within the locality&#x27;s review period<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">4</th><td><span class="desc">Public hearing and recommendation</span><span class="note">If the commission misses the deadline, it is deemed to have recommended approval. The project itself is not deemed approved.</span><span class="src">Source: Va. Code §15.2-2285(B)</span></td><td>Local planning commission</td><td>Within 100 days after first meeting following referral<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">5</th><td><span class="desc">Public hearing and decision</span><span class="note">Applies in counties. The statute sets no deemed approval if the deadline is missed; the applicant may agree to a longer period.</span><span class="src">Source: Va. Code §15.2-2286(A)(7)</span></td><td>Locality (board of supervisors or city council)</td><td>Within 12 months of submission, unless the applicant agrees to extend<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">6</th><td><span class="desc">Submit site plan; locality acts</span><span class="note">A resubmitted plan not acted on within 30 days is deemed approved. If a first review is late, the applicant may petition circuit court after 10 days&#x27; notice.</span><span class="src">Source: Va. Code §15.2-2259(A)(3), (C)</span></td><td>Developer</td><td>Within 40 days; resubmissions within 30 days<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">7</th><td><span class="desc">State review: projects of 25 MW or more get no expedited review</span><span class="note">No state step waits on local approval, unlike Pennsylvania.</span><span class="src">Source: Executive Order 22 (Sept. 18, 2026), as reported by Holland &amp; Knight</span></td><td>DEQ</td><td>Standard review timelines<span class="ttype">Set by order</span></td></tr>
+<tr><th scope="row">8</th><td><span class="desc">Air permit for backup generators: new data centers must use Tier 4 generators</span><span class="note">Applies to air permit applications from July 1, 2026 (as reported). The rest of HB 507 (batteries first, runtime caps) did not become law. DEQ guidance sets a presumptive limit of 0.60 g/hp-hr.</span><span class="src">Source: 2026 session, as reported by Canary Media (June 23, 2026) and Data Center Knowledge</span></td><td>DEQ</td><td>Varies<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">9</th><td><span class="desc">Other permits as applicable (construction stormwater, water withdrawal)</span><span class="note">Eastern Virginia Groundwater Management Area designated a cooling-water-scarcity area.</span><span class="src">Source: Executive Order 22</span></td><td>DEQ</td><td>Varies<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">10</th><td><span class="desc">Issue permits</span></td><td>DEQ</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">11</th><td><span class="path">Parallel track</span><span class="desc">Request service; utility identifies substations and transmission needed</span><span class="note">Runs alongside steps 1–10. Feeds the step 3 site assessment.</span><span class="src">Source: Va. Code §15.2-2209.5 (utility disclosure)</span></td><td>Electric utility &amp; SCC</td><td>No set deadline<span class="ttype">Open-ended</span></td></tr>
+<tr class="side"><th scope="row">12</th><td><span class="path">Parallel track</span><span class="desc">Large-load rate class (GS-5) for customers of 25 MW or more: minimum 85% of transmission and distribution demand, 60% of generation demand</span><span class="src">Source: SCC final order, Dominion biennial review (Nov. 25, 2025), as reported by Loudoun Now</span></td><td>Electric utility &amp; SCC</td><td>Effective Jan. 1, 2027<span class="ttype">Set by order</span></td></tr>
+<tr class="side"><th scope="row">13</th><td><span class="path">Parallel track</span><span class="desc">Transmission built for a data center is paid for by the data center</span><span class="note">Dominion must develop a tariff that directly assigns transmission built for large-load customers to them; expected to take effect early 2027 (as reported). Case number not found.</span><span class="src">Source: SCC order in Dominion&#x27;s Rider T1 transmission case, early August 2026, as reported by Virginia Mercury and DCD</span></td><td>Electric utility &amp; SCC</td><td>—<span class="ttype">Set by order</span></td></tr>
+<tr class="side"><th scope="row">14</th><td><span class="path">Pending</span><span class="desc">Pending: 2027 session proposals to end by-right approval for data centers over 25 MW; moratorium bills filed</span><span class="note">Loudoun voted Sept. 15, 2026 to move toward a pause of up to 12 months on data center applications.</span><span class="src">Source: Governor&#x27;s Data Center Accountability Framework; SB 843 (2027)</span></td><td>Locality (board of supervisors or city council)</td><td>Pending<span class="ttype">Pending</span></td></tr>
+</tbody></table></div>
+</details>
+<details class="state-steps" id="steps-ohio">
+<summary><span class="st">Ohio</span><span class="count">15 steps, 3 on the main path</span></summary>
+<div class="table-scroll"><table class="steps">
+<thead><tr><th scope="col">Step</th><th scope="col">What happens</th><th scope="col">Lane</th><th scope="col">Time</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><span class="desc">Check local zoning: city (home rule), zoned township, or unzoned township</span><span class="note">Where a township has adopted no zoning, there may be no local land use approval at all.</span><span class="src">Source: Planetizen/WOUB, March 2026</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">2</th><td><span class="path">Decision point</span><span class="desc">Decision: rezoning or conditional use needed?</span><span class="note">Unzoned: skip to step 11.</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">3</th><td><span class="path">Rezoning branch</span><span class="desc">File zoning amendment application</span><span class="src">Source: Ohio Rev. Code 519.12(A)(1) (version effective Sept. 23, 2026)</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">4</th><td><span class="path">Rezoning branch</span><span class="desc">Send amendment to county or regional planning commission</span><span class="note">Planning commission recommendation is considered at the zoning commission hearing.</span><span class="src">Source: Ohio Rev. Code 519.12(E)(1)(a) (version effective Sept. 23, 2026)</span></td><td>Township zoning commission, BZA &amp; county planning commission</td><td>Within 5 days of filing<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">5</th><td><span class="path">Rezoning branch</span><span class="desc">Public hearing</span><span class="src">Source: Ohio Rev. Code 519.12(A)(2) (version effective Sept. 23, 2026)</span></td><td>Township zoning commission, BZA &amp; county planning commission</td><td>20 to 40 days after filing<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">6</th><td><span class="path">Rezoning branch</span><span class="desc">Recommend approval, denial or modification to trustees</span><span class="src">Source: Ohio Rev. Code 519.12(E)(2) (version effective Sept. 23, 2026)</span></td><td>Township zoning commission, BZA &amp; county planning commission</td><td>Within 30 days after hearing<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">7</th><td><span class="path">Rezoning branch</span><span class="desc">Public hearing</span><span class="src">Source: Ohio Rev. Code 519.12(E)(3) (version effective Sept. 23, 2026)</span></td><td>Township trustees (or city council)</td><td>Within 30 days of receiving recommendation<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">8</th><td><span class="path">Rezoning branch</span><span class="desc">Adopt, deny or modify</span><span class="src">Source: Ohio Rev. Code 519.12(H) (version effective Sept. 23, 2026)</span></td><td>Township trustees (or city council)</td><td>Within 20 days after hearing<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">9</th><td><span class="path">Rezoning branch</span><span class="desc">Rezoning takes effect unless voters petition for a referendum</span><span class="note">New (J)(1): megaproject rezonings take effect immediately with no referendum. The current megaproject definition (R.C. 122.17(A)(11)) does not exclude data centers, so a project meeting its $1 billion investment or $75 million payroll test and wage test could qualify. Pending HB 646 would exclude data centers from the main route.</span><span class="src">Source: Ohio Rev. Code 519.12(H), (J)(1) (version effective Sept. 23, 2026)</span></td><td>Township trustees (or city council)</td><td>30 days after adoption; petition due within 30 days; vote at next election at least 90 days out<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">10</th><td><span class="path">Conditional use branch</span><span class="desc">Alternative: conditional use from the township board of zoning appeals</span><span class="note">Timelines set by each township&#x27;s zoning resolution.</span></td><td>Township zoning commission, BZA &amp; county planning commission</td><td>Set locally<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">11</th><td><span class="desc">Apply for permits as applicable: air permit-to-install for backup generators; construction stormwater (over 1 acre); wastewater permits</span><span class="note">&quot;Data centers are not subject to a unique environmental permitting program in Ohio.&quot;</span><span class="src">Source: Ohio EPA testimony, House Data Centers Committee, May 27, 2026</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">12</th><td><span class="desc">Draft permit, public notice, comment period, hearing if requested or required, response to comments, final permit</span><span class="note">Testimony does not tie Ohio EPA review to local zoning.</span><span class="src">Source: Ohio EPA testimony, May 27, 2026</span></td><td>Ohio EPA</td><td>No timelines stated<span class="ttype">Varies</span></td></tr>
+<tr class="side"><th scope="row">13</th><td><span class="path">Pending</span><span class="desc">Draft general NPDES permit for data centers</span><span class="note">Thousands of comments received.</span><span class="src">Source: Ohio EPA testimony, May 27, 2026</span></td><td>Ohio EPA</td><td>No timeframe<span class="ttype">Pending</span></td></tr>
+<tr class="side"><th scope="row">14</th><td><span class="path">Parallel track</span><span class="desc">Request service; AEP Ohio data center tariff for 25 MW and up: minimum demand up to 85% of contract capacity; contract of up to 4 ramp years plus 8 years</span><span class="note">Applies to new facilities and expansions. HB 706 would extend similar terms to other utilities (introduced).</span><span class="src">Source: AEP Ohio tariff page; PUCO Case 24-508-EL-ATA (order July 9, 2025)</span></td><td>Electric utility, PUCO &amp; Power Siting Board</td><td>In effect since July 23, 2025<span class="ttype">Set by order</span></td></tr>
+<tr class="side"><th scope="row">15</th><td><span class="path">Parallel track</span><span class="desc">On-site power plant that is a major utility facility: Power Siting Board certificate replaces local review</span><span class="note">Hilliard: Ohio Power Company&#x27;s 72.9 MW fuel cell plant for an AWS data center (Case 25-0649-EL-BLN) was filed as an accelerated application subject to automatic approval; staff recommended approval Sept. 22, 2025, and city review was withdrawn.</span><span class="src">Source: Ohio Rev. Code 4906.13(B); HB 15 (2025); City of Hilliard</span></td><td>Electric utility, PUCO &amp; Power Siting Board</td><td>Accelerated process available<span class="ttype">Statutory</span></td></tr>
+</tbody></table></div>
+</details>
+<details class="state-steps" id="steps-maryland">
+<summary><span class="st">Maryland</span><span class="count">12 steps, 7 on the main path</span></summary>
+<div class="table-scroll"><table class="steps">
+<thead><tr><th scope="col">Step</th><th scope="col">What happens</th><th scope="col">Lane</th><th scope="col">Time</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><span class="desc">Check county zoning and any data center pause</span><span class="note">Prince George&#x27;s adopted a two-year pause in July 2026; Montgomery, Frederick and Baltimore County also paused development (as reported).</span><span class="src">Source: Spotlight PA, July 10, 2026</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">2</th><td><span class="desc">File rezoning, special exception or site plan under the county code</span><span class="note">Each county sets its own procedures and timelines.</span></td><td>Developer</td><td>—<span class="ttype">Set locally</span></td></tr>
+<tr><th scope="row">3</th><td><span class="desc">Review, hearing and recommendation or decision</span></td><td>County planning board or board of appeals</td><td>Set by county code<span class="ttype">Set locally</span></td></tr>
+<tr><th scope="row">4</th><td><span class="desc">Decide rezoning or zoning text amendment</span><span class="note">Frederick County: a referendum petition on the January 2026 data center ordinance gathered more than 20,000 signatures, but a circuit court ruled June 18 that the zoning ordinance is not subject to referendum under the county charter, and the Maryland Supreme Court upheld that ruling June 30. It is not on the November ballot (as reported).</span><span class="src">Source: Technical.ly, July 1, 2026</span></td><td>County council (governing body)</td><td>Set by county code<span class="ttype">Set locally</span></td></tr>
+<tr class="side"><th scope="row">5</th><td><span class="path">Decision point</span><span class="desc">Decision: does backup generation qualify for the exclusion from state power plant approval?</span><span class="note">Qualifies if used only for emergency backup and testing, cannot send power to the grid, holds an MDE permit to construct, and meets noise and testing-hour rules.</span><span class="src">Source: SB 474 (2024), Critical Infrastructure Streamlining Act; Dept. of Legislative Services fiscal note</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">6a</th><td><span class="path">Yes branch</span><span class="desc">Yes: permit to construct for backup generators; no PSC approval needed</span><span class="note">Owners report each use to MDE every Dec. 1; reports are public.</span><span class="src">Source: SB 474 (2024), Critical Infrastructure Streamlining Act; Dept. of Legislative Services fiscal note</span></td><td>MDE</td><td>—<span class="ttype">Varies</span></td></tr>
+<tr class="side"><th scope="row">6b</th><td><span class="path">No branch</span><span class="desc">No: Certificate of Public Convenience and Necessity (or PSC-approved exemption) for generation</span><span class="note">Before 2024, the PSC capped one data center campus at 70 MW of backup generation.</span><span class="src">Source: Fiscal note, current law</span></td><td>Electric utility &amp; PSC</td><td>—<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">7</th><td><span class="desc">Other permits as applicable (water appropriation, erosion and sediment control, stormwater)</span><span class="note">Erosion and sediment control plans are approved by soil conservation districts, county or city public works departments, or MDE, depending on the jurisdiction.</span></td><td>MDE</td><td>Varies<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">8</th><td><span class="desc">Issue permits</span></td><td>MDE</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">9</th><td><span class="desc">Register with the Public Service Commission&#x27;s large-load registry (energy and water use; fee of at least $1,000 per MW of peak load)</span><span class="note">Registration is with the PSC (as reported).</span><span class="src">Source: Mintz, AG Watch (Oct. 2026); Spotlight PA; T&amp;D World (June 15, 2026)</span></td><td>Developer</td><td>From January 2027<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">10</th><td><span class="path">Parallel track</span><span class="desc">Request service; large-load customer rules apply at 25 MW and 60% load factor</span><span class="note">Emergency law lowered the 2025 threshold of 100 MW and 80% load factor. PJM capacity costs are passed through to large-load customers.</span><span class="src">Source: HB 1532 (2026), Ch. 353, Utility RELIEF Act, as reported by Mintz</span></td><td>Electric utility &amp; PSC</td><td>In effect since May 12, 2026<span class="ttype">Statutory</span></td></tr>
+<tr class="side"><th scope="row">11</th><td><span class="path">Parallel track</span><span class="desc">Large-load tariffs: utilities filed by Sept. 1, 2026; PSC review under way</span><span class="src">Source: Next Generation Energy Act (2025); HB 1532 (2026)</span></td><td>Electric utility &amp; PSC</td><td>Pending<span class="ttype">Pending</span></td></tr>
+</tbody></table></div>
+</details>
+<details class="state-steps" id="steps-georgia">
+<summary><span class="st">Georgia</span><span class="count">11 steps, 7 on the main path</span></summary>
+<div class="table-scroll"><table class="steps">
+<thead><tr><th scope="col">Step</th><th scope="col">What happens</th><th scope="col">Lane</th><th scope="col">Time</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><span class="desc">Check county or city zoning for a data center use</span><span class="note">Counties and cities each zone under their own ordinances.</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">2</th><td><span class="path">Decision point</span><span class="desc">Decision: is the project a Development of Regional Impact?</span><span class="note">Data centers of 500,000 sq ft or more; 300,000 sq ft in urban and suburban areas of the Atlanta region.</span><span class="src">Source: DCA board vote, Nov. 2025, as reported by Georgia Recorder</span></td><td>Developer</td><td>—<span class="ttype">Set by rule</span></td></tr>
+<tr class="side"><th scope="row">3a</th><td><span class="path">DRI branch</span><span class="desc">Yes: submit project for regional review, with estimated water and electricity needs</span><span class="note">Developer supplies the water and power estimates.</span><span class="src">Source: DCA board vote, Nov. 2025, as reported by Georgia Recorder</span></td><td>County commission or city council</td><td>—<span class="ttype">Set by rule</span></td></tr>
+<tr class="side"><th scope="row">4a</th><td><span class="path">DRI branch</span><span class="desc">Review and comment; public notice</span><span class="note">&quot;The local government may not take final action approving the project while the DRI process is ongoing.&quot; Regional commissions comment but do not approve or oppose.</span><span class="src">Source: Ga. Comp. R. &amp; Regs. 110-12-7-.01; DCA board vote, Nov. 2025</span></td><td>Regional commission &amp; local planning commission</td><td>No more than 30 calendar days, unless extended<span class="ttype">Set by rule</span></td></tr>
+<tr><th scope="row">5</th><td><span class="desc">File rezoning or special use application</span></td><td>Developer</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">6</th><td><span class="desc">Review and recommendation</span><span class="note">Where the locality has a planning commission.</span></td><td>Regional commission &amp; local planning commission</td><td>Set locally<span class="ttype">Set locally</span></td></tr>
+<tr><th scope="row">7</th><td><span class="desc">Public hearing</span><span class="note">Each side gets at least 10 minutes (§ 36-66-5).</span><span class="src">Source: O.C.G.A. § 36-66-4 (Zoning Procedures Law)</span></td><td>County commission or city council</td><td>Published notice 15 to 45 days before; sign on property at least 15 days before<span class="ttype">Statutory</span></td></tr>
+<tr><th scope="row">8</th><td><span class="desc">Decide rezoning</span><span class="note">If denied, the same property cannot be reconsidered for at least six months.</span><span class="src">Source: O.C.G.A. § 36-66-4(c)</span></td><td>County commission or city council</td><td>—<span class="ttype">None set</span></td></tr>
+<tr><th scope="row">9</th><td><span class="desc">Permits as applicable: construction stormwater general permit (Notice of Intent to EPD); air permits for backup generators (permit-by-rule, synthetic minor or Title V, by size); pretreatment permit for significant industrial users</span><span class="note">Synthetic minor permits are common for large generator fleets.</span><span class="src">Source: City of Tyrone data center information sheet</span></td><td>EPD</td><td>Varies<span class="ttype">Varies</span></td></tr>
+<tr><th scope="row">10</th><td><span class="desc">Issue permits</span></td><td>EPD</td><td>—<span class="ttype">None set</span></td></tr>
+<tr class="side"><th scope="row">11</th><td><span class="path">Parallel track</span><span class="desc">Request service; customers over 100 MW: contracts up to 15 years, minimum bills, and contracts submitted to the PSC for review</span><span class="note">Data centers pay site-specific costs and upstream generation, transmission and distribution costs as construction proceeds.</span><span class="src">Source: Georgia PSC media advisory, Jan. 23, 2025 (from Docket 55378)</span></td><td>Georgia Power &amp; PSC</td><td>In effect since Jan. 23, 2025<span class="ttype">Set by order</span></td></tr>
+</tbody></table></div>
+</details>
+    </div>
+  </section>
+
+  <section id="sources" class="sources">
+    <div class="wrap"><div class="measure">
+      <h2>Sources</h2>
+      <p>Grouped by state. Each entry notes which steps or rows it supports.</p>
+<h3>Pennsylvania</h3>
+<ul>
+  <li><a href="https://www.pa.gov/content/dam/copapwp-pagov/en/governor/documents/eo2026_05_protecting%20pennsylvania%20consumers%20from%20data%20center%20impacts_final_executed.pdf" rel="noopener">Executive Order 2026-05</a> <span class="covers">Steps 8–10a, 9b, 14 (Secs. 1(a)–(e), 3)</span></li>
+  <li><a href="https://www.babstcalland.com/news-article/the-devil-is-in-the-details-and-the-deemed-approval-deadlines" rel="noopener">Babst Calland, &quot;The devil is in the details and the deemed approval deadlines&quot;</a> <span class="covers">Steps 3, 4, 7 (MPC §§ 508, 908, 913.2)</span></li>
+  <li><a href="https://www.puc.pa.gov/pcdocs/1952506.pdf" rel="noopener">PA PUC tentative order, Docket M-2026-3064961</a> <span class="covers">Step 15</span></li>
+  <li><a href="https://indianlakepa.gov/FILES/REFERENCE/PLANNING/MPC/MPCTimingProvisions.pdf" rel="noopener">MPC timing provisions summary (Indian Lake Borough), citing §502(b)</a> <span class="covers">Step 6 (30-day county review, MPC §502(b))</span></li>
+</ul>
+<h3>Virginia</h3>
+<ul>
+  <li><a href="https://vacode.org/2026/15.2-2285/" rel="noopener">Va. Code §15.2-2285</a> <span class="covers">Step 4</span></li>
+  <li><a href="https://www.pwcva.gov/assets/2026-06/FY2027%20Request%20for%20Extension%20of%20Review%20Time%20Period%20for%20Rezoning%20Applications.pdf" rel="noopener">Prince William County, rezoning review extension form</a> <span class="covers">Step 5 (§15.2-2286(A)(7))</span></li>
+  <li><a href="https://pwcaws.pwcva.gov/assets/2026-06/HEUF%20Determination%20Form.pdf" rel="noopener">Prince William County, HEUF determination form</a> <span class="covers">Steps 3, 11 (§15.2-2209.5)</span></li>
+  <li><a href="https://valcv.org/bills/SB94/" rel="noopener">Virginia LCV, SB 94 bill page</a> <span class="covers">Step 3 (signed; 2026 Acts ch. 568)</span></li>
+  <li><a href="https://www.hklaw.com/en/insights/publications/2026/09/virginias-new-data-center-accountability-framework" rel="noopener">Holland &amp; Knight, &quot;Virginia&#x27;s New Data Center Accountability Framework&quot;</a> <span class="covers">Steps 7, 9, 14 (Executive Order 22)</span></li>
+  <li><a href="https://www.mcguirewoods.com/client-resources/alerts/2026/9/virginia-data-centers-fast-changing-landscape-what-developers-need-to-know/" rel="noopener">McGuireWoods, &quot;Virginia Data Centers&#x27; Fast-Changing Landscape&quot;</a> <span class="covers">Steps 1, 14</span></li>
+  <li><a href="https://datacenterknowledge.com/build-design/virginia-deq-revises-data-center-generator-rules-as-community-pushback-builds" rel="noopener">Data Center Knowledge, May 19, 2026</a> <span class="covers">Step 8 (HB 507)</span></li>
+  <li><a href="https://www.loudounnow.com/news/scc-approves-new-data-center-rate-class-for-dominion/article_02d5fa0c-1ed8-4771-b57d-c24765739854.html" rel="noopener">Loudoun Now, SCC GS-5 rate class</a> <span class="covers">Step 12</span></li>
+  <li><a href="https://www.governor.virginia.gov/newsroom/news-releases/2026/august-releases/name-1122057-en.html" rel="noopener">Office of the Governor, Aug. 5, 2026 release</a> <span class="covers">Step 13</span></li>
+  <li><a href="https://www.vacode.org/downloads/2026/code-html/15.2-2286.html" rel="noopener">Va. Code §15.2-2286</a> <span class="covers">Step 5</span></li>
+  <li><a href="https://vacode.org/downloads/2026/code-text/15.2-2259.txt" rel="noopener">Va. Code §15.2-2259</a> <span class="covers">Step 6</span></li>
+  <li><a href="https://www.canarymedia.com/articles/data-centers/virginia-data-centers-new-tax" rel="noopener">Canary Media, June 23, 2026</a> <span class="covers">Step 8</span></li>
+  <li><a href="https://virginiamercury.com/2026/08/05/scc-orders-dominion-to-develop-tariff-to-assign-more-transmission-costs-to-data-centers/" rel="noopener">Virginia Mercury, Aug. 5, 2026</a> <span class="covers">Step 13</span></li>
+</ul>
+<h3>Ohio</h3>
+<ul>
+  <li><a href="https://codes.ohio.gov/assets/laws/revised-code/authenticated/5/519/519.12/9-23-2026/519.12-9-23-2026.pdf" rel="noopener">Ohio Rev. Code 519.12, version effective Sept. 23, 2026</a> <span class="covers">Steps 3–9</span></li>
+  <li><a href="https://search-prod.lis.state.oh.us/api/v2/general_assembly_136/committees/cmte_h_data_centers_1/meetings/cmte_h_data_centers_1_2026-05-27-1000_1337/submissions/datacenterwrittentestimonylogueohioepa.pdf" rel="noopener">Ohio EPA written testimony, House Data Centers Committee, May 27, 2026</a> <span class="covers">Steps 11–13</span></li>
+  <li><a href="https://www.renewableenergyworld.com/energy-business/policy-and-regulation/ohio-utility-regulators-approve-aeps-contested-data-center-tariff-proposal/" rel="noopener">Renewable Energy World, PUCO approves AEP Ohio data center tariff</a> <span class="covers">Step 14</span></li>
+  <li><a href="https://hilliardohio.gov/state-law-overrides-local-review-for-aws-fuel-cell-system-in-hilliard/" rel="noopener">City of Hilliard, &quot;State law overrides local review for AWS fuel cell system&quot;</a> <span class="covers">Step 15</span></li>
+  <li><a href="https://www.bricker.com/insights/publications/ohio-advances-major-energy-legislation-h-b-15-and-s-b-2-clear-key-hurdles-and-await-final-approval" rel="noopener">Bricker Graydon on HB 15 and SB 2</a> <span class="covers">Step 15 (background)</span></li>
+  <li><a href="https://ohiocapitaljournal.com/2026/03/12/ohioans-are-getting-fed-up-with-data-centers-state-lawmakers-are-starting-to-notice/" rel="noopener">Ohio Capital Journal, March 12, 2026</a> <span class="covers">Pending proposals</span></li>
+  <li><a href="https://www.planetizen.com/news/2026/03/137254-rural-ohio-reconsidering-its-laissez-faire-zoning-culture-data-centers-threaten" rel="noopener">Planetizen, March 31, 2026</a> <span class="covers">Step 1</span></li>
+  <li><a href="https://www.aepohio.com/company/about/rates/data-center-tariff" rel="noopener">AEP Ohio data center tariff page</a> <span class="covers">Step 14</span></li>
+  <li><a href="https://hilliardohio.gov/wp-content/uploads/2025/10/OPSB-Report-Certificate-and-Conditions.pdf" rel="noopener">OPSB staff report, Case 25-0649-EL-BLN (posted by City of Hilliard)</a> <span class="covers">Step 15</span></li>
+  <li><a href="https://codes.ohio.gov/ohio-revised-code/section-122.17" rel="noopener">Ohio Rev. Code 122.17 (megaproject definition)</a> <span class="covers">Step 9</span></li>
+</ul>
+<h3>Maryland</h3>
+<ul>
+  <li><a href="https://mgaleg.maryland.gov/2024RS/fnotes/bil_0004/sb0474.pdf" rel="noopener">Dept. of Legislative Services, SB 474 (2024) fiscal note</a> <span class="covers">Steps 5–6b</span></li>
+  <li><a href="https://www.datacenterfrontier.com/site-selection/article/55039349/maryland-reboots-data-center-business-with-new-critical-infrastructure-streamlining-act" rel="noopener">Data Center Frontier on the Critical Infrastructure Streamlining Act</a> <span class="covers">Step 6b (background)</span></li>
+  <li><a href="https://www.mintz.com/sites/default/files/media/documents/2026-10-05/AG-Watch-How-Maryland-Is-Meeting-The-Data-Center-Age_Erek-L.-Barron.pdf" rel="noopener">Mintz, &quot;AG Watch: How Maryland Is Meeting The Data Center Age&quot; (Oct. 2026)</a> <span class="covers">Steps 9–11</span></li>
+  <li><a href="https://www.spotlightpa.org/news/2026/07/maryland-prince-georges-data-center-moratorium-environment/" rel="noopener">Spotlight PA / Maryland Matters, July 10, 2026</a> <span class="covers">Step 1, pending items</span></li>
+  <li><a href="https://cnsmaryland.org/2026/04/17/battles-over-data-centers-intensify-in-the-state-house-and-communities/" rel="noopener">Capital News Service, April 17, 2026</a> <span class="covers">Step 4, pending items</span></li>
+  <li><a href="https://technical.ly/civics/maryland-supreme-court-frederick-data-center-referendum.md" rel="noopener">Technical.ly, July 1, 2026</a> <span class="covers">Step 4</span></li>
+  <li><a href="https://mde.maryland.gov/programs/water/wwp/Pages/ListofApprovalAuthorityContacts.aspx" rel="noopener">MDE, erosion and sediment control approval authorities</a> <span class="covers">Step 7</span></li>
+</ul>
+<h3>Georgia</h3>
+<ul>
+  <li><a href="https://georgiarecorder.com/2025/11/21/georgia-board-approves-new-review-process-for-large-data-centers/" rel="noopener">Georgia Recorder, Nov. 21, 2025, DCA data center review rules</a> <span class="covers">Steps 2–4a</span></li>
+  <li><a href="https://www.greenecountyga.gov/DocumentCenter/View/558/GA-Zoning-Procedures-Act-PDF" rel="noopener">O.C.G.A. §§ 36-66-4 and 36-66-5 (Zoning Procedures Law), copy posted by Greene County</a> <span class="covers">Steps 7–8</span></li>
+  <li><a href="https://psc.ga.gov/site/assets/files/8617/media_advisory_data_centers_rule_1-23-2025.pdf" rel="noopener">Georgia PSC media advisory, Jan. 23, 2025</a> <span class="covers">Step 11</span></li>
+  <li><a href="https://insideclimatenews.org/news/09042026/georgia-legislature-data-center-bills-fail/" rel="noopener">Inside Climate News, April 9, 2026</a> <span class="covers">Pending items</span></li>
+  <li><a href="https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-110-12-7-.01" rel="noopener">Ga. Comp. R. &amp; Regs. 110-12-7-.01 (DRI rules)</a> <span class="covers">Step 4a</span></li>
+  <li><a href="https://www.tyronega.gov/sites/default/files/uploads/Admin/data-center-information-sheet-1.pdf" rel="noopener">City of Tyrone, data center information sheet</a> <span class="covers">Step 9</span></li>
+</ul>
+    </div></div>
+  </section>
+
+  <section id="data" class="band">
+    <div class="wrap"><div class="measure">
+      <h2>Download the data</h2>
+      <p>Every table on this page is built from these files.</p>
+      <ul class="downloads">
+        <li><a href="data-center-siting-comparison.csv" download>data-center-siting-comparison.csv</a>: the side-by-side table, with 12 questions as rows and the five states as columns.</li>
+        <li><a href="data-center-siting-steps.csv" download>data-center-siting-steps.csv</a>: 68 approval steps, in order for each state, with lane, path, time, time type, source and note.</li>
+        <li><a href="data-center-siting-sources.csv" download>data-center-siting-sources.csv</a>: 40 sources with links, by state.</li>
+      </ul>
+    </div></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap measure">
+    <p>Compiled by Joshua Phoebus, former Director of Performance and Transformation in the Office of Pennsylvania Governor Tom Wolf. <a href="https://www.linkedin.com/in/joshuaphoebus">LinkedIn</a> · <a href="https://www.joshuaphoebusllc.com">Website</a> · <a href="https://jphoebus.github.io/">All projects</a></p>
+    <p>Part of a series on how states make decisions when an industry outgrows the existing rules. Related: <a href="https://jphoebus.github.io/large-load-screening/">Which data center load counts</a> · <a href="https://jphoebus.github.io/large-load-tariffs/">Who pays for data center power</a> · <a href="https://jphoebus.github.io/data-center-legislation-2026/">What states changed on data centers in 2026</a> · <a href="https://jphoebus.github.io/state-incentive-comparison/">State data center incentives, compared</a> · <a href="https://jphoebus.github.io/data-center-exempt-equipment/">What counts as exempt data center equipment</a> · <a href="https://jphoebus.github.io/tax-incentive-evaluation/">How states check their tax incentives</a> · <a href="https://jphoebus.github.io/spark-grid-tracker/">DOE&#x27;s SPARK grid selections, tracked</a> · <a href="https://jphoebus.github.io/quantum-readiness/">Are state rules ready for quantum computing?</a> · <a href="https://jphoebus.github.io/state-payments-policy/">Is it a loan? How states set payments rules</a> · <a href="https://jphoebus.github.io/state-drug-supply-chain/">Who sets the price of a prescription?</a> · <a href="https://jphoebus.github.io/medicaid-transportation/">Who arranges the ride?</a></p>
+    <p>Each state&#x27;s sources are listed above. Last updated October 21, 2026.</p>
+  </div>
+</footer>
+
+<script>
+  // Each state button shows or hides that state's column. The table itself is plain HTML,
+  // so it displays even if this script never runs.
+  document.querySelectorAll("#filters .chip").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var on = b.getAttribute("aria-pressed") === "true";
+      b.setAttribute("aria-pressed", on ? "false" : "true");
+      document.querySelectorAll('#table [data-state="' + b.dataset.state + '"]').forEach(function (c) { c.hidden = on; });
+    });
+  });
+</script>
+<script data-goatcounter="https://jphoebus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
