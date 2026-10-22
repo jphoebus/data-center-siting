@@ -6,7 +6,7 @@ How Pennsylvania, Virginia, Ohio, Maryland and Georgia decide where data centers
 
 ## Headline findings
 
-- **Each state puts its decision points in a different place.** Pennsylvania ties state environmental review to local approval: under Executive Order 2026-05, DEP issues permits only after local approvals are documented. Ohio lets a state board's certificate for an on-site power plant replace local review, and township voters can petition to overturn a rezoning. Virginia requires a site and sound assessment for facilities of 100 MW or more before local approval. Georgia sends large projects through a regional review that takes comment but does not decide. In Maryland, several counties have paused data center development.
+- **Each state puts its decision points in a different place.** Pennsylvania and Maryland tie state review to local approval: under executive orders in both states, projects that don't commit to the state's standards wait for local approvals before state review proceeds. Ohio lets a state board's certificate for an on-site power plant replace local review, and township voters can petition to overturn a rezoning. Virginia requires a site and sound assessment for facilities of 100 MW or more before local approval. Georgia sends large projects through a regional review that takes comment but does not decide. In Maryland, several counties have paused data center development.
 - **Missed deadlines mean different things.** In Pennsylvania, a municipality that misses its decision deadline deems the project approved. In Virginia, only the planning commission's recommendation is deemed approval; the statute sets no consequence when the governing body misses its 12-month deadline.
 - **Large-load electricity tariffs are at different stages:** in effect in Georgia (January 2025, over 100 MW) and Ohio (July 2025, 25 MW and up); Virginia's takes effect Jan. 1, 2027; Maryland's are under PSC review; Pennsylvania's is a tentative order with a final vote targeted for Jan. 28, 2027.
 
@@ -17,8 +17,8 @@ Each state's process is simplified, and the steps a project actually follows dep
 ## About the data
 
 - [data-center-siting-comparison.csv](data-center-siting-comparison.csv): the side-by-side table, with 12 questions as rows and the five states as columns.
-- [data-center-siting-steps.csv](data-center-siting-steps.csv): 68 approval steps, in order for each state, with lane, path, time, time type, source and note. Steps whose path is not "Main" are decision points, branches, parallel tracks or pending items.
-- [data-center-siting-sources.csv](data-center-siting-sources.csv): 42 sources with links, by state.
+- [data-center-siting-steps.csv](data-center-siting-steps.csv): 71 approval steps, in order for each state, with lane, path, time, time type, source and note. Steps whose path is not "Main" are decision points, branches, parallel tracks or pending items.
+- [data-center-siting-sources.csv](data-center-siting-sources.csv): 44 sources with links, by state.
 
 This comparison describes what states do and is for policy analysis. It is not legal or regulatory advice.
 
