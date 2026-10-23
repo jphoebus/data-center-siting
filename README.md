@@ -1,6 +1,6 @@
 # Who Approves a Data Center? How Five States Decide Where Data Centers Can Be Built
 
-How Pennsylvania, Virginia, Ohio, Maryland and Georgia decide where data centers can be built: local zoning, state permits, regional review and utility rules. Current as of October 22, 2026.
+How Pennsylvania, Virginia, Ohio, Maryland and Georgia decide where data centers can be built: local zoning, state permits, regional review and utility rules. Current as of October 23, 2026.
 
 **Interactive version:** [jphoebus.github.io/data-center-siting](https://jphoebus.github.io/data-center-siting/)
 
@@ -18,7 +18,7 @@ Each state's process is simplified, and the steps a project actually follows dep
 
 - [data-center-siting-comparison.csv](data-center-siting-comparison.csv): the side-by-side table, with 12 questions as rows and the five states as columns.
 - [data-center-siting-steps.csv](data-center-siting-steps.csv): 71 approval steps, in order for each state, with lane, path, time, time type, source and note. Steps whose path is not "Main" are decision points, branches, parallel tracks or pending items.
-- [data-center-siting-sources.csv](data-center-siting-sources.csv): 44 sources with links, by state.
+- [data-center-siting-sources.csv](data-center-siting-sources.csv): 45 sources with links, by state.
 
 This comparison describes what states do and is for policy analysis. It is not legal or regulatory advice.
 
