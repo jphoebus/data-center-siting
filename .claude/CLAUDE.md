@@ -23,6 +23,7 @@ These pages are neutral, sourced policy comparisons published at jphoebus.github
 - The CSV must match the page. Where a CSV has one row per action, add a new row for a new action rather than appending to another row.
 - Update source and step counts in the download list and README when rows change.
 - data-center-siting: index.html was built from the three CSVs, but the build script isn't in the repo. Edit the CSVs and the matching page markup together, and keep them identical.
+- data-center-siting: the "Process maps" section (#maps) in index.html isn't built from the CSVs. It's maintained by hand, and it must be kept if the page is ever regenerated.
 
 ## Page structure
 
