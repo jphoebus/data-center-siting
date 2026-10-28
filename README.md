@@ -22,7 +22,7 @@ Each state's process is simplified, and the steps a project actually follows dep
 
 ## Process maps
 
-The page includes a process map of Pennsylvania's and Virginia's steps and a six-page PDF of the same maps ([PA-VA-data-center-siting-carousel.pdf](PA-VA-data-center-siting-carousel.pdf)). Process maps built with [Insighta](https://insightasystems.com).
+The page includes a process map of Pennsylvania's and Virginia's steps and a six-page PDF of the same maps ([PA-VA-data-center-siting-carousel.pdf](PA-VA-data-center-siting-carousel.pdf)). Powered by [InsightaSystems.com](https://insightasystems.com).
 
 This comparison describes what states do and is for policy analysis. It is not legal or regulatory advice.
 
