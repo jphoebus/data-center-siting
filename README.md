@@ -18,7 +18,7 @@ Each state's process is simplified, and the steps a project actually follows dep
 
 - [data-center-siting-comparison.csv](data-center-siting-comparison.csv): the side-by-side table, with 12 questions as rows and the five states as columns.
 - [data-center-siting-steps.csv](data-center-siting-steps.csv): 71 approval steps, in order for each state, with lane, path, time, time type, source and note. Steps whose path is not "Main" are decision points, branches, parallel tracks or pending items.
-- [data-center-siting-sources.csv](data-center-siting-sources.csv): 47 sources with links, by state.
+- [data-center-siting-sources.csv](data-center-siting-sources.csv): 48 sources with links, by state.
 
 ## Process maps
 
